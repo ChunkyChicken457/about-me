@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A long-form fake about me page with a rich personal story, timeline, projects, stats, gallery-style sections, and a polished responsive design.">
+  <title>Fake About Me Page Deluxe</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=boska@400,500,700&display=swap" rel="stylesheet">
+  <style>
+    :root, [data-theme="light"] {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+      --text-3xl: clamp(2.75rem, 1rem + 4vw, 5.5rem);
+      --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
+      --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem;
+      --space-12: 3rem; --space-16: 4rem; --space-20: 5rem; --space-24: 6rem; --space-32: 8rem;
+      --color-bg: #f7f6f2;
+      --color-surface: #f9f8f5;
+      --color-surface-2: #fbfbf9;
+      --color-surface-3: #f1eee8;
+      --color-border: #d4d1ca;
+      --color-divider: #e2ded7;
+      --color-text: #28251d;
+      --color-text-muted: #6f6d67;
+      --color-text-faint: #a7a49d;
+      --color-primary: #01696f;
+      --color-primary-hover: #0c4e54;
+      --color-primary-soft: #dcebea;
+      --color-secondary: #ab6d36;
+      --color-secondary-soft: #efe1d1;
+      --color-accent: #6b4bb6;
+      --color-accent-soft: #e7def8;
+      --radius-sm: 0.5rem;
+      --radius-md: 0.9rem;
+      --radius-lg: 1.4rem;
+      --radius-xl: 2rem;
+      --radius-full: 999px;
+      --shadow-sm: 0 2px 6px rgba(25, 25, 25, 0.05);
+      --shadow-md: 0 14px 38px rgba(25, 25, 25, 0.08);
+      --shadow-lg: 0 20px 60px rgba(25, 25, 25, 0.12);
+      --transition: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+      --font-body: 'Satoshi', Inter, sans-serif;
+      --font-display: 'Boska', Georgia, serif;
+      --content: 1220px;
+      --content-narrow: 760px;
+    }
+
+    [data-theme="dark"] {
+      --color-bg: #171614;
+      --color-surface: #1c1b19;
+      --color-surface-2: #22211f;
+      --color-surface-3: #2a2926;
+      --color-border: #393836;
+      --color-divider: #2f2d2b;
+      --color-text: #ece7dc;
+      --color-text-muted: #b6b0a7;
+      --color-text-faint: #827c73;
+      --color-primary: #63aeb7;
+      --color-primary-hover: #89c9cf;
+      --color-primary-soft: #243537;
+      --color-secondary: #d39d68;
+      --color-secondary-soft: #3a2b20;
+      --color-accent: #b698ff;
+      --color-accent-soft: #302745;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.22);
+      --shadow-md: 0 18px 42px rgba(0, 0, 0, 0.34);
+      --shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.45);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme]) {
+        --color-bg: #171614;
+        --color-surface: #1c1b19;
+        --color-surface-2: #22211f;
+        --color-surface-3: #2a2926;
+        --color-border: #393836;
+        --color-divider: #2f2d2b;
+        --color-text: #ece7dc;
+        --color-text-muted: #b6b0a7;
+        --color-text-faint: #827c73;
+        --color-primary: #63aeb7;
+        --color-primary-hover: #89c9cf;
+        --color-primary-soft: #243537;
+        --color-secondary: #d39d68;
+        --color-secondary-soft: #3a2b20;
+        --color-accent: #b698ff;
+        --color-accent-soft: #302745;
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.7;
+      color: var(--color-text);
+      background:
+        radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--color-primary-soft) 85%, transparent), transparent 28%),
+        radial-gradient(circle at 100% 15%, color-mix(in srgb, var(--color-secondary-soft) 70%, transparent), transparent 24%),
+        radial-gradient(circle at 80% 100%, color-mix(in srgb, var(--color-accent-soft) 62%, transparent), transparent 22%),
+        var(--color-bg);
+    }
+
+    img, svg { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+
+    .skip-link {
+      position: absolute;
+      left: var(--space-4);
+      top: -50px;
+      z-index: 100;
+      padding: var(--space-2) var(--space-4);
+      background: var(--color-primary);
+      color: #fff;
+      border-radius: var(--radius-sm);
+    }
+    .skip-link:focus { top: var(--space-4); }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: color-mix(in srgb, var(--color-bg) 80%, transparent);
+      border-bottom: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
+    }
+
+    .nav {
+      max-width: var(--content);
+      margin: 0 auto;
+      padding: var(--space-4);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-mark {
+      width: 2.6rem;
+      height: 2.6rem;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--color-surface);
+      border: 1px solid color-mix(in srgb, var(--color-text) 12%, transparent);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-cluster {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    .nav-links a {
+      position: relative;
+      padding: 0.25rem 0;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.12rem;
+      width: 100%;
+      height: 1px;
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transition);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a:focus-visible::after { transform: scaleX(1); }
+
+    .theme-toggle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+      background: var(--color-surface);
+      color: var(--color-text);
+      display: inline-grid;
+      place-items: center;
+      cursor: pointer;
+      transition: transform var(--transition), background var(--transition), border-color var(--transition);
+    }
+
+    .theme-toggle:hover,
+    .button:hover,
+    .mini-link:hover,
+    .pill-link:hover { transform: translateY(-1px); }
+
+    main {
+      max-width: var(--content);
+      margin: 0 auto;
+      padding: clamp(var(--space-8), 4vw, var(--space-16)) var(--space-4) var(--space-20);
+    }
+
+    section {
+      margin-top: clamp(var(--space-12), 7vw, var(--space-24));
+      scroll-margin-top: 6rem;
+    }
+
+    .hero {
+      min-height: 90vh;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+      gap: var(--space-8);
+      align-items: center;
+      margin-top: var(--space-4);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      margin-bottom: var(--space-4);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-text-muted);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 1.5rem;
+      height: 1px;
+      background: currentColor;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      line-height: 1.06;
+    }
+
+    h1, h2 {
+      font-family: var(--font-display);
+      font-weight: 500;
+    }
+
+    h1 {
+      font-size: clamp(3.25rem, 7vw, 7rem);
+      max-width: 8.5ch;
+      letter-spacing: -0.02em;
+    }
+
+    h2 { font-size: var(--text-2xl); margin-bottom: var(--space-4); }
+    h3 { font-size: var(--text-lg); margin-bottom: var(--space-3); }
+
+    p { margin: 0 0 var(--space-4); max-width: 72ch; }
+    .lede { font-size: var(--text-lg); color: var(--color-text-muted); max-width: 60ch; }
+    .muted { color: var(--color-text-muted); }
+    .faint { color: var(--color-text-faint); }
+
+    .hero-actions,
+    .socials,
+    .cta-row,
+    .pill-links,
+    .value-grid,
+    .micro-grid,
+    .stats-grid,
+    .project-grid,
+    .quotes-grid,
+    .faq-grid,
+    .memory-grid,
+    .board-grid,
+    .list-grid,
+    .end-grid {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      margin-top: var(--space-6);
+    }
+
+    .button,
+    .pill-link,
+    .mini-link {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      border-radius: var(--radius-full);
+      transition: transform var(--transition), background var(--transition), border-color var(--transition), color var(--transition);
+    }
+
+    .button {
+      padding: 0.85rem 1.25rem;
+      border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+      background: var(--color-surface);
+    }
+
+    .button.primary {
+      background: var(--color-primary);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .button.primary:hover { background: var(--color-primary-hover); }
+
+    .button.secondary {
+      background: var(--color-primary-soft);
+      color: var(--color-primary);
+      border-color: transparent;
+    }
+
+    .hero-card,
+    .panel,
+    .card,
+    .quote-card,
+    .faq-card,
+    .project-card,
+    .micro-card,
+    .memory-card,
+    .list-card,
+    .end-card,
+    .board-card,
+    .stat-card,
+    .timeline-card,
+    .profile-card {
+      background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+      border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+      padding: var(--space-6);
+      box-shadow: var(--shadow-lg);
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 78%, transparent), color-mix(in srgb, var(--color-surface-2) 92%, transparent));
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -15% -20% auto;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, color-mix(in srgb, var(--color-primary) 24%, transparent), transparent 70%);
+      pointer-events: none;
+    }
+
+    .avatar-wrap {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      margin-bottom: var(--space-5);
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 30px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 2rem;
+      background: linear-gradient(135deg, var(--color-primary), color-mix(in srgb, var(--color-accent) 55%, white));
+      box-shadow: var(--shadow-md);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 0.55rem 0.85rem;
+      border-radius: var(--radius-full);
+      background: var(--color-primary-soft);
+      color: var(--color-primary);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+    }
+
+    .dot {
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(4, 1fr);
+      margin-top: var(--space-6);
+    }
+
+    .stat-card {
+      padding: var(--space-4);
+      background: var(--color-surface-2);
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: var(--text-lg);
+      margin-bottom: var(--space-1);
+    }
+
+    .section-head {
+      display: grid;
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
+      max-width: var(--content-narrow);
+    }
+
+    .two-col,
+    .split-layout,
+    .story-layout,
+    .contact-layout,
+    .board-grid,
+    .end-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-6);
+    }
+
+    .card, .panel, .timeline-card, .profile-card, .board-card, .end-card, .list-card {
+      padding: var(--space-6);
+    }
+
+    .panel.soft-primary { background: linear-gradient(180deg, color-mix(in srgb, var(--color-primary-soft) 75%, var(--color-surface)), var(--color-surface)); }
+    .panel.soft-secondary { background: linear-gradient(180deg, color-mix(in srgb, var(--color-secondary-soft) 80%, var(--color-surface)), var(--color-surface)); }
+    .panel.soft-accent { background: linear-gradient(180deg, color-mix(in srgb, var(--color-accent-soft) 72%, var(--color-surface)), var(--color-surface)); }
+
+    .tags,
+    .pill-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+
+    .tag,
+    .pill-link {
+      padding: 0.5rem 0.9rem;
+      border-radius: var(--radius-full);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 700;
+    }
+
+    .tag.primary, .pill-link.primary {
+      background: var(--color-primary-soft);
+      color: var(--color-primary);
+    }
+    .tag.secondary, .pill-link.secondary {
+      background: var(--color-secondary-soft);
+      color: var(--color-secondary);
+    }
+    .tag.accent, .pill-link.accent {
+      background: var(--color-accent-soft);
+      color: var(--color-accent);
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: var(--space-5);
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: 0.2rem;
+      top: 0.55rem;
+      width: 0.65rem;
+      height: 0.65rem;
+      border-radius: 50%;
+      background: var(--color-primary);
+      box-shadow: 0 0 0 6px color-mix(in srgb, var(--color-primary) 12%, transparent);
+    }
+
+    .timeline-item::after {
+      content: "";
+      position: absolute;
+      left: 0.5rem;
+      top: 1.4rem;
+      bottom: -1.6rem;
+      width: 1px;
+      background: color-mix(in srgb, var(--color-text) 12%, transparent);
+    }
+
+    .timeline-item:last-child::after { display: none; }
+
+    .timeline-year {
+      display: inline-block;
+      margin-bottom: var(--space-2);
+      color: var(--color-text-faint);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .micro-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .micro-card {
+      padding: var(--space-4);
+      background: var(--color-surface-2);
+    }
+
+    .micro-card h3 { margin-bottom: var(--space-2); }
+
+    .project-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .project-card {
+      padding: var(--space-5);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      background: linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 92%, transparent), color-mix(in srgb, var(--color-surface-2) 95%, transparent));
+    }
+
+    .project-top {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-3);
+      align-items: flex-start;
+    }
+
+    .project-index {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--color-surface-3);
+      color: var(--color-text-muted);
+      font-size: var(--text-xs);
+      font-weight: 700;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+
+    .mini-link {
+      padding: 0.65rem 0.9rem;
+      border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+      background: var(--color-surface-2);
+      color: var(--color-text-muted);
+    }
+
+    .quote-card {
+      padding: var(--space-6);
+      background: linear-gradient(180deg, color-mix(in srgb, var(--color-primary-soft) 65%, var(--color-surface)), color-mix(in srgb, var(--color-secondary-soft) 40%, var(--color-surface)));
+    }
+
+    .quote-card blockquote {
+      margin: 0 0 var(--space-4);
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 2vw, 2.4rem);
+      line-height: 1.15;
+    }
+
+    .quotes-grid,
+    .faq-grid,
+    .memory-grid,
+    .list-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .faq-card,
+    .memory-card {
+      padding: var(--space-5);
+      background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+    }
+
+    .board-grid {
+      align-items: stretch;
+    }
+
+    .board {
+      display: grid;
+      gap: var(--space-3);
+    }
+
+    .board-item {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-4);
+      border-radius: var(--radius-lg);
+      background: var(--color-surface-2);
+      border: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
+    }
+
+    .board-item span:last-child { color: var(--color-text-muted); }
+
+    .memory-card ul,
+    .list-card ul,
+    .end-card ul {
+      margin: 0;
+      padding-left: 1.1rem;
+      color: var(--color-text-muted);
+    }
+
+    .memory-card li,
+    .list-card li,
+    .end-card li { margin-bottom: var(--space-2); }
+
+    .profile-stack {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    .profile-line {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-3);
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--color-divider);
+    }
+
+    .profile-line:last-child { border-bottom: 0; }
+
+    .contact-layout form {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    label {
+      display: grid;
+      gap: var(--space-2);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 0.95rem 1rem;
+      border-radius: var(--radius-md);
+      border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+      background: var(--color-surface-2);
+      color: var(--color-text);
+    }
+
+    textarea { min-height: 140px; resize: vertical; }
+
+    .cta-banner {
+      padding: clamp(var(--space-6), 5vw, var(--space-10));
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(135deg, color-mix(in srgb, var(--color-primary-soft) 80%, var(--color-surface)), color-mix(in srgb, var(--color-accent-soft) 72%, var(--color-surface)));
+      border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+      box-shadow: var(--shadow-md);
+    }
+
+    .cta-row {
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+    }
+
+    footer {
+      max-width: var(--content);
+      margin: 0 auto;
+      padding: 0 var(--space-4) var(--space-10);
+      color: var(--color-text-faint);
+      font-size: var(--text-sm);
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 1080px) {
+      .hero,
+      .two-col,
+      .split-layout,
+      .story-layout,
+      .contact-layout,
+      .board-grid,
+      .end-grid,
+      .cta-row,
+      .quotes-grid,
+      .faq-grid,
+      .memory-grid,
+      .list-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .micro-grid { grid-template-columns: repeat(2, 1fr); }
+      .project-grid { grid-template-columns: 1fr 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 760px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-cluster {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      h1 { font-size: clamp(3rem, 14vw, 5rem); max-width: 10ch; }
+      .micro-grid,
+      .project-grid,
+      .stats-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary navigation">
+      <a href="#top" class="brand" aria-label="Fake profile homepage">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 18L12 4L20 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8.5 12.5H15.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M10.2 18H13.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span>Nova Hale</span>
+      </a>
+
+      <div class="nav-cluster">
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#story">Story</a>
+          <a href="#projects">Projects</a>
+          <a href="#archive">Archive</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3A7 7 0 0 0 21 12.79Z"/>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="content">
+    <section class="hero" id="top">
+      <div>
+        <div class="eyebrow">Extended fake profile / personal site</div>
+        <h1>Hi, I’m Nova. I build ideas that feel neat, dramatic, and strangely real.</h1>
+        <p class="lede">This is a deliberately fictional about me page made to feel like an actual long-form personal website. It is part portfolio, part diary, part identity performance, and part polished nonsense in the best possible way.</p>
+        <p>Nobody here needs to exist for the page to work. The trick is detail. Good fake pages feel believable because they include rhythm, habits, opinions, little contradictions, and small bits of texture that make the person seem lived in rather than generated.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#about">Start reading</a>
+          <a class="button secondary" href="#projects">View fake projects</a>
+          <a class="button" href="#contact">Steal this layout</a>
+        </div>
+      </div>
+
+      <aside class="hero-card" aria-label="Profile summary">
+        <div class="avatar-wrap">
+          <div class="avatar" aria-hidden="true">N</div>
+          <div>
+            <div class="status-badge"><span class="dot" aria-hidden="true"></span>Probably online</div>
+            <p class="muted" style="margin-top: 0.75rem; margin-bottom: 0;">Designer of imaginary products, collector of unfinished tabs, and defender of overthinking as a creative method.</p>
+          </div>
+        </div>
+
+        <div class="profile-stack" aria-label="Quick profile facts">
+          <div class="profile-line"><strong>Base</strong><span class="muted">Somewhere between late-night glow and desktop clutter</span></div>
+          <div class="profile-line"><strong>Energy</strong><span class="muted">Calm first impression, chaotic operating system</span></div>
+          <div class="profile-line"><strong>Specialty</strong><span class="muted">Turning vague ideas into pages that look suspiciously intentional</span></div>
+          <div class="profile-line"><strong>Motto</strong><span class="muted">If it feels too neat, add one weird detail</span></div>
+        </div>
+
+        <div class="stats-grid" aria-label="Profile stats">
+          <div class="stat-card"><strong>148</strong><span class="muted">Open notes</span></div>
+          <div class="stat-card"><strong>27</strong><span class="muted">Draft identities</span></div>
+          <div class="stat-card"><strong>04:13</strong><span class="muted">Peak thinking time</span></div>
+          <div class="stat-card"><strong>99%</strong><span class="muted">Powered by music</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="about">
+      <div class="section-head">
+        <div class="eyebrow">About</div>
+        <h2>A fictional person with enough detail to sound honest</h2>
+        <p class="muted">Nova Hale is the kind of person who color codes one folder and ignores the other forty. She likes elegant layouts, big windows, low light, loud headphones, and the feeling of fixing a tiny visual flaw nobody else was going to notice.</p>
+      </div>
+
+      <div class="two-col">
+        <article class="card">
+          <h3>Short version</h3>
+          <p>Nova makes concept pages, fake brands, scraps of writing, and digital spaces that feel like they belong to someone with very specific habits. Her work usually starts as an unnecessary side project and slowly becomes the best thing she has made all month.</p>
+          <p>She says she likes clean design, but what she actually likes is contrast. A page that looks quiet on the surface and slightly dangerous underneath. A room that feels organized until you inspect the desk. A person who seems composed until they start explaining one oddly specific obsession in full detail.</p>
+          <div class="tags" aria-label="Traits">
+            <span class="tag primary">Quietly dramatic</span>
+            <span class="tag secondary">Detail obsessed</span>
+            <span class="tag accent">Night built</span>
+            <span class="tag primary">Aesthetic liar</span>
+            <span class="tag secondary">Always revising</span>
+          </div>
+        </article>
+
+        <aside class="panel soft-primary">
+          <h3>Longer version</h3>
+          <p>There is always a point in the process where Nova decides the first idea was too obvious. That is usually where the actual work begins. She strips things back, rebuilds the mood, changes the phrasing, removes anything that feels generic, and adds one carefully chosen sentence that gives the whole page a pulse.</p>
+          <p>In another life she could have been a creative director, a playlist curator, a copywriter, or someone who writes strange little bios for people who do not exist. In this one, she is mostly a person with too many browser tabs and a dangerous amount of confidence in the phrase “I’ll just quickly redo the whole thing.”</p>
+          <p>That sentence is rarely true. The redo is never quick. It is, however, usually better.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="story">
+      <div class="section-head">
+        <div class="eyebrow">Story</div>
+        <h2>The fake timeline</h2>
+        <p class="muted">A good fake identity benefits from history. The details do not need to be real, but they should suggest progression, taste, mistakes, and a slightly embarrassing early phase.</p>
+      </div>
+
+      <div class="story-layout">
+        <article class="timeline-card">
+          <div class="timeline" aria-label="Timeline of milestones">
+            <div class="timeline-item">
+              <span class="timeline-year">2017</span>
+              <h3>Made the first website</h3>
+              <p>It was mostly black, white, and confidence. The navigation was too dramatic, the spacing was inconsistent, and the homepage quote made no sense. It still felt important.</p>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-year">2019</span>
+              <h3>Started collecting visual references</h3>
+              <p>Folders filled with typography screenshots, layouts, grainy photography, interface details, and color combinations that looked like they belonged in a colder city than the one she lived in.</p>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-year">2021</span>
+              <h3>Fell in love with mock projects</h3>
+              <p>Fake apps, fake launch pages, fake magazines, fake bios, fake products. The freedom of inventing the rules made the work sharper.</p>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-year">2024</span>
+              <h3>Learned restraint</h3>
+              <p>Less glow. Better type. Fewer effects. More confidence in whitespace, structure, and one line of copy doing more work than ten decorative choices ever could.</p>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-year">Now</span>
+              <h3>Builds worlds from scraps</h3>
+              <p>Nova now makes polished pages that look like they belong to actual people, products, and ideas. Some are serious. Some are jokes. Most sit somewhere in between.</p>
+            </div>
+          </div>
+        </article>
+
+        <aside class="panel soft-secondary">
+          <h3>Personal habits archive</h3>
+          <p>Every fake person needs recurring habits. These are the small pieces that make the whole thing feel less like a character sheet and more like somebody you could accidentally follow online.</p>
+          <div class="micro-grid">
+            <div class="micro-card">
+              <h3>01</h3>
+              <p>Renames folders with sudden bursts of optimism, then never updates the files inside them.</p>
+            </div>
+            <div class="micro-card">
+              <h3>02</h3>
+              <p>Writes cleaner at night, designs better in the early morning, answers messages at a legally questionable speed.</p>
+            </div>
+            <div class="micro-card">
+              <h3>03</h3>
+              <p>Has a playlist for starting work, a playlist for continuing work, and a playlist for pretending the work is almost done.</p>
+            </div>
+            <div class="micro-card">
+              <h3>04</h3>
+              <p>Believes every project gets better after one unnecessary but emotionally satisfying rewrite.</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="values">
+      <div class="section-head">
+        <div class="eyebrow">Values</div>
+        <h2>Things Nova claims to believe</h2>
+        <p class="muted">This is where the fake person develops a point of view. Beliefs are useful because they make every other section feel less random.</p>
+      </div>
+
+      <div class="value-grid two-col">
+        <article class="panel soft-accent">
+          <h3>Clarity first</h3>
+          <p>If something looks clever but reads badly, it failed. A page should reward attention, not demand unnecessary patience. The best design choice is usually the one that makes the experience feel obvious after the fact.</p>
+          <h3>Texture matters</h3>
+          <p>People remember specifics. A favorite hour of the night, a strange personal rule, a bad old project, a tiny obsession. Those details turn a generic profile into a believable one.</p>
+        </article>
+
+        <article class="card">
+          <h3>Beauty should still function</h3>
+          <p>Nova likes dramatic presentation, but only when it still works in motion, on mobile, and under mild scrutiny. She has no patience for aesthetics that collapse the moment someone actually tries to use them.</p>
+          <h3>Leave one edge rough</h3>
+          <p>If everything is too polished, the page goes dead. There should be one phrase, image, choice, or contrast that feels a little more alive than the rest.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="section-head">
+        <div class="eyebrow">Projects</div>
+        <h2>A portfolio of things that never had to be real</h2>
+        <p class="muted">Fake projects are useful because they tell people what kind of taste the person has. They also make the page look much more substantial.</p>
+      </div>
+
+      <div class="project-grid">
+        <article class="project-card">
+          <div class="project-top">
+            <div>
+              <h3>Afterglow Notes</h3>
+              <p class="muted">A concept app for saving thoughts that only seem smart after midnight.</p>
+            </div>
+            <div class="project-index">01</div>
+          </div>
+          <p>The interface was intentionally calm, almost clinical, with hidden warmth in the typography and color accents. The idea was simple: make insomnia look organized.</p>
+          <div class="project-meta">
+            <span class="tag primary">UI concept</span>
+            <span class="tag accent">Writing</span>
+          </div>
+          <a href="#" class="mini-link">View case study</a>
+        </article>
+
+        <article class="project-card">
+          <div class="project-top">
+            <div>
+              <h3>Westline Supply</h3>
+              <p class="muted">A fake hardware brand with a very real obsession with labels, packaging, and structured grids.</p>
+            </div>
+            <div class="project-index">02</div>
+          </div>
+          <p>Built around industrial tones, restrained typography, and product descriptions that made screws sound cinematic. Nobody needed that much drama from a parts catalog, which made it perfect.</p>
+          <div class="project-meta">
+            <span class="tag secondary">Branding</span>
+            <span class="tag primary">Editorial layout</span>
+          </div>
+          <a href="#" class="mini-link">Open archive</a>
+        </article>
+
+        <article class="project-card">
+          <div class="project-top">
+            <div>
+              <h3>Signal Bloom</h3>
+              <p class="muted">An imaginary campaign site for a festival that mixed ambient music, projection art, and slightly pretentious copy.</p>
+            </div>
+            <div class="project-index">03</div>
+          </div>
+          <p>Everything moved slowly and looked expensive. The site itself was less important than the feeling it produced, which was somewhere between invitation and dare.</p>
+          <div class="project-meta">
+            <span class="tag accent">Creative direction</span>
+            <span class="tag secondary">Motion concept</span>
+          </div>
+          <a href="#" class="mini-link">Read more</a>
+        </article>
+
+        <article class="project-card">
+          <div class="project-top">
+            <div>
+              <h3>Ghost Office</h3>
+              <p class="muted">A fake productivity tool for people who wanted their to-do list to feel emotionally complicated.</p>
+            </div>
+            <div class="project-index">04</div>
+          </div>
+          <p>Tasks arrived like quiet warnings. Progress was shown through subtle shifts in texture, not loud celebration. It was absurdly serious for a fake app and that was exactly the point.</p>
+          <div class="project-meta">
+            <span class="tag primary">Product page</span>
+            <span class="tag accent">Interaction writing</span>
+          </div>
+          <a href="#" class="mini-link">Preview concept</a>
+        </article>
+
+        <article class="project-card">
+          <div class="project-top">
+            <div>
+              <h3>Paper Current</h3>
+              <p class="muted">A digital magazine that treated every article like a quiet emergency.</p>
+            </div>
+            <div class="project-index">05</div>
+          </div>
+          <p>Designed with layered type, long margins, careful pacing, and dramatic pull quotes. The goal was to make reading feel expensive without becoming unreadable.</p>
+          <div class="project-meta">
+            <span class="tag secondary">Publishing</span>
+            <span class="tag primary">Type system</span>
+          </div>
+          <a href="#" class="mini-link">Browse issue</a>
+        </article>
+
+        <article class="project-card">
+          <div class="project-top">
+            <div>
+              <h3>North Exit Club</h3>
+              <p class="muted">A members-only website for absolutely nobody, which somehow made it more convincing.</p>
+            </div>
+            <div class="project-index">06</div>
+          </div>
+          <p>Private event listings, coded invitations, a fake membership process, and photography guidelines for events that would never happen. Nova called it world-building. Other people called it a bit.</p>
+          <div class="project-meta">
+            <span class="tag accent">Worldbuilding</span>
+            <span class="tag secondary">Identity system</span>
+          </div>
+          <a href="#" class="mini-link">Enter portal</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="archive">
+      <div class="section-head">
+        <div class="eyebrow">Archive</div>
+        <h2>The parts that make the fiction believable</h2>
+        <p class="muted">Small recurring details do a lot of work. This section turns the page from a clean template into a much fuller fake identity.</p>
+      </div>
+
+      <div class="quotes-grid">
+        <article class="quote-card">
+          <blockquote>“I trust people who have renamed a file four times and still know exactly where it is.”</blockquote>
+          <p class="muted">A fake personal quote works best when it sounds oddly specific rather than inspirational.</p>
+        </article>
+        <article class="quote-card">
+          <blockquote>“Good taste is mostly editing, timing, and the ability to stop before a cool idea becomes embarrassing.”</blockquote>
+          <p class="muted">This is the kind of line someone would post once and then quietly reuse in three different bios.</p>
+        </article>
+      </div>
+
+      <div class="memory-grid" style="margin-top: var(--space-6);">
+        <article class="memory-card">
+          <h3>Favorite environments</h3>
+          <ul>
+            <li>A desk lamp at 2 AM with everything else in shadow.</li>
+            <li>A cafe table by a window that feels too cinematic to be productive in.</li>
+            <li>A desktop with one perfect folder and twelve suspicious ones.</li>
+            <li>A train, a bus, or any moving place where thoughts feel temporarily more complete.</li>
+          </ul>
+        </article>
+        <article class="memory-card">
+          <h3>Low-stakes obsessions</h3>
+          <ul>
+            <li>Spacing that feels expensive.</li>
+            <li>Headings with one word too many, then one word removed.</li>
+            <li>Interfaces that look calm before you notice the hidden intensity.</li>
+            <li>Fonts that behave well at small sizes and become dramatic when given room.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="boards">
+      <div class="section-head">
+        <div class="eyebrow">Boards</div>
+        <h2>Current rotation</h2>
+        <p class="muted">This section works like a snapshot of the fake person’s current brain. It is useful because it adds movement and taste without needing any real-world proof.</p>
+      </div>
+
+      <div class="board-grid">
+        <article class="board-card">
+          <h3>Listening to</h3>
+          <div class="board">
+            <div class="board-item"><span>Night Drive, Again</span><span>Looped too many times</span></div>
+            <div class="board-item"><span>Soft Static FM</span><span>For focused rewrites</span></div>
+            <div class="board-item"><span>Concrete Echoes</span><span>Rain soundtrack energy</span></div>
+            <div class="board-item"><span>Low Voltage Hearts</span><span>Too dramatic, still good</span></div>
+          </div>
+        </article>
+
+        <article class="board-card">
+          <h3>Thinking about</h3>
+          <div class="board">
+            <div class="board-item"><span>Why some pages feel more honest than others</span><span>Ongoing</span></div>
+            <div class="board-item"><span>How much detail makes a fake story believable</span><span>Testing</span></div>
+            <div class="board-item"><span>Whether neat design needs one ugly decision</span><span>Probably yes</span></div>
+            <div class="board-item"><span>If another rewrite is necessary</span><span>Unfortunately yes</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="lists">
+      <div class="section-head">
+        <div class="eyebrow">Lists</div>
+        <h2>Useful extra sections for a very long fake page</h2>
+        <p class="muted">You asked for it as long as possible, so this version includes extra material you can keep, trim, or rewrite into your own style.</p>
+      </div>
+
+      <div class="list-grid">
+        <article class="list-card">
+          <h3>Things Nova is supposedly good at</h3>
+          <ul>
+            <li>Making mockups feel complete before the underlying idea is fully decided.</li>
+            <li>Writing bios that sound honest without being literally true.</li>
+            <li>Choosing type that does most of the emotional work quietly.</li>
+            <li>Fixing spacing problems that nobody else could name but everyone could feel.</li>
+            <li>Giving fake products a visual system that implies a whole company behind them.</li>
+            <li>Turning a half-joke into an unexpectedly polished finished page.</li>
+          </ul>
+        </article>
+
+        <article class="list-card">
+          <h3>Things Nova is supposedly bad at</h3>
+          <ul>
+            <li>Calling a first draft finished.</li>
+            <li>Keeping desktop folders aligned with reality.</li>
+            <li>Starting with the easy version of any idea.</li>
+            <li>Writing “short” descriptions that remain short.</li>
+            <li>Closing tabs that might still be useful three weeks later.</li>
+            <li>Accepting that sometimes the cleaner option really was better.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="section-head">
+        <div class="eyebrow">FAQ</div>
+        <h2>Questions nobody asked, answered anyway</h2>
+        <p class="muted">FAQ blocks help a fake page feel more complete, especially if the answers reveal personality instead of just repeating facts.</p>
+      </div>
+
+      <div class="faq-grid">
+        <article class="faq-card">
+          <h3>Is Nova a real person?</h3>
+          <p>Not necessarily. She is a convincing arrangement of habits, preferences, projects, and tone. That is enough for a page like this.</p>
+        </article>
+        <article class="faq-card">
+          <h3>Why make a fake about page?</h3>
+          <p>Because mock identities are useful for design practice, writing practice, placeholders, school tasks, profile demos, or jokes that deserve much more effort than they technically need.</p>
+        </article>
+        <article class="faq-card">
+          <h3>How do you make it feel real?</h3>
+          <p>Use specifics. Mention times, habits, contradictions, opinions, and tiny flaws. Generic compliments make fake people flatter but less believable.</p>
+        </article>
+        <article class="faq-card">
+          <h3>What should be edited first?</h3>
+          <p>Name, pronouns, tagline, fake projects, habits, and any lines that sound too much like someone else. Keep the structure, replace the texture.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="section-head">
+        <div class="eyebrow">Contact</div>
+        <h2>Fake ways to get in touch</h2>
+        <p class="muted">These links and fields are placeholders, but they make the page feel complete. Replace them with real details or keep them as part of the fiction.</p>
+      </div>
+
+      <div class="contact-layout">
+        <article class="card">
+          <h3>Contact card</h3>
+          <p>For a more serious version, swap this section with real socials, a GitHub link, a portfolio URL, or a school-safe profile summary. For a joke version, keep the fake handle and absurdly polished language.</p>
+          <div class="socials">
+            <a class="pill-link primary" href="#">@novahale.exe</a>
+            <a class="pill-link secondary" href="#">hello@novafiction.test</a>
+            <a class="pill-link accent" href="#">/nova-hale-archive</a>
+            <a class="pill-link primary" href="#">north-exit.club/member/zero</a>
+          </div>
+          <p class="faint" style="margin-top: var(--space-5);">None of the above needs to work. It only needs to look intentional.</p>
+        </article>
+
+        <article class="card">
+          <h3>Message form</h3>
+          <form>
+            <label>
+              Your name
+              <input type="text" placeholder="e.g. Someone with a strange idea">
+            </label>
+            <label>
+              Your email
+              <input type="email" placeholder="e.g. definitelyreal@example.com">
+            </label>
+            <label>
+              Your message
+              <textarea placeholder="Say something mysterious, practical, or weirdly specific."></textarea>
+            </label>
+            <button type="button" class="button primary">Send nothing anywhere</button>
+          </form>
+        </article>
+      </div>
+    </section>
+
+    <section id="ending">
+      <div class="cta-banner">
+        <div class="cta-row">
+          <div>
+            <div class="eyebrow">Final note</div>
+            <h2>Take this page and make it yours</h2>
+            <p class="muted">Change the name, rewrite the personality, replace the projects, and tune the tone until it sounds like the exact kind of fake person you wanted. The length, structure, and detail are already doing most of the work for you.</p>
+          </div>
+          <div class="pill-links" aria-label="Suggested edits">
+            <span class="pill-link primary">Swap the fake name</span>
+            <span class="pill-link secondary">Rewrite the timeline</span>
+            <span class="pill-link accent">Add your own jokes</span>
+            <span class="pill-link primary">Replace fake socials</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="end-grid" style="margin-top: var(--space-6);">
+        <article class="end-card">
+          <h3>Fast edit checklist</h3>
+          <ul>
+            <li>Replace “Nova Hale” everywhere with your chosen fake name.</li>
+            <li>Change the avatar letter to match the new name.</li>
+            <li>Swap the fake projects for your own made-up ideas.</li>
+            <li>Rewrite the habits so they sound like the type of person you want to imitate.</li>
+            <li>Adjust colors if you want a darker, softer, louder, or more serious look.</li>
+            <li>Delete any sections you do not need. The page is intentionally oversized.</li>
+          </ul>
+        </article>
+        <article class="end-card">
+          <h3>Best use cases</h3>
+          <ul>
+            <li>Mock portfolio page.</li>
+            <li>Design practice piece.</li>
+            <li>School web project placeholder identity.</li>
+            <li>Funny personal landing page.</li>
+            <li>Template for a more real about me page later.</li>
+            <li>Character profile for a story, project, or online persona.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Fake About Me Page Deluxe. Long on purpose, polished on purpose, fictional on purpose.
+  </footer>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const toggle = document.querySelector('[data-theme-toggle]');
+      let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      root.setAttribute('data-theme', theme);
+
+      function renderIcon() {
+        toggle.innerHTML = theme === 'dark'
+          ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><path d="M12 1V3M12 21V23M4.22 4.22L5.64 5.64M18.36 18.36L19.78 19.78M1 12H3M21 12H23M4.22 19.78L5.64 18.36M18.36 5.64L19.78 4.22"></path></svg>'
+          : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3A7 7 0 0 0 21 12.79Z"></path></svg>';
+        toggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      }
+
+      renderIcon();
+      toggle.addEventListener('click', function () {
+        theme = theme === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', theme);
+        renderIcon();
+      });
+    }());
+  </script>
+</body>
+</html>
